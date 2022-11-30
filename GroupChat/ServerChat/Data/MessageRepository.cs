@@ -7,19 +7,17 @@ public class MessageRepository
   public async Task<Guid> Create(Guid groupId, Guid senderId, string content)
   {
     Guid messageId = Guid.NewGuid();
-    using (ApplicationContext db = new ApplicationContext())
+    await using ApplicationContext db = new ();
+    DbMessage dbMessage = new()
     {
-      DbMessage dbMessage = new()
-      {
-        Id = messageId,
-        GroupId = groupId,
-        SenderId = senderId,
-        Content = content,
-        SendDateTimeAtUtc = DateTime.UtcNow
-      };
-      db.Messages.Add(dbMessage);
-      await db.SaveChangesAsync();
-    }
+      Id = messageId,
+      GroupId = groupId,
+      SenderId = senderId,
+      Content = content,
+      SendDateTimeAtUtc = DateTime.UtcNow
+    };
+    db.Messages.Add(dbMessage);
+    await db.SaveChangesAsync();
 
     return messageId;
   }

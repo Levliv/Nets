@@ -21,7 +21,7 @@ public class UserRepository
     Guid userId = Guid.NewGuid();
     await using ApplicationContext db = new ();
     
-    if (await db.Users.FirstOrDefaultAsync(user => user.Login == login) == null)
+    if (await db.Users.FirstOrDefaultAsync(user => user.Login == login) != null)
     {
       return null;
     }
