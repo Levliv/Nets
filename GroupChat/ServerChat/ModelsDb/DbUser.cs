@@ -8,4 +8,6 @@ public class DbUser
   public bool IsActive { get; set; }
   public DateTime RegDateTimeAtUtc { get; set; }
   public DateTime? LastActiveDateTimeAtUtc { get; set; }
+
+  public List<DbGroup> Groups { get; set; } = new ();
 }
