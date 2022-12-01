@@ -5,18 +5,14 @@ namespace ServerChat;
 
 public class Server
 {
-  private readonly TcpListener _tcpListener = new (IPAddress.Any, 8000);
+  private readonly TcpListener _tcpListener;
   private readonly List<Client> _clients = new ();
-  protected internal void RemoveConnection(Guid id)
+
+  public Server(int port)
   {
-    Client? client = _clients.FirstOrDefault(c => c.Id == id);
-    if (client is not null)
-    {
-      _clients.Remove(client);
-    }
-    client?.Dispose();
+    _tcpListener = new (IPAddress.Any, 8000);
   }
-    
+  
   public async Task StartUpListenAsync()
   {
     try
@@ -50,7 +46,17 @@ public class Server
       await client.Writer.FlushAsync();
     }
   }
-
+  
+  protected internal void RemoveConnection(Guid id)
+  {
+    Client? client = _clients.FirstOrDefault(c => c.Id == id);
+    if (client is not null)
+    {
+      _clients.Remove(client);
+    }
+    client?.Dispose();
+  }
+  
   private void Dispose()
   {
     foreach (Client client in _clients)
