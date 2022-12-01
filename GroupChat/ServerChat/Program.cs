@@ -1,3 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using ServerChat;
 
-Console.WriteLine("Hello, World!");
+Server server = new ();
+await server.ListenAsync();

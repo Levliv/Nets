@@ -4,15 +4,14 @@ namespace ServerChat.Data;
 
 public class MessageRepository
 {
-  public async Task<Guid> Create(Guid groupId, Guid senderId, string content)
+  public async Task<Guid> CreateAsync(string login, string content)
   {
     Guid messageId = Guid.NewGuid();
     await using ApplicationContext db = new ();
     DbMessage dbMessage = new()
     {
       Id = messageId,
-      GroupId = groupId,
-      SenderId = senderId,
+      Login = login,
       Content = content,
       SendDateTimeAtUtc = DateTime.UtcNow
     };
