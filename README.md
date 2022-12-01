@@ -6,3 +6,6 @@ It collects information about all users logged in and save the messages they sen
 
 ### [ClientApp](GroupChat/ClientChat)
 Contains client part of an application, interacts with user, sends and receives massages for ip and port described in lauching parametrs.
+
+## License
+Code in `src`, `tests` directories are licensed under the [MIT Licence](LICENSE).
