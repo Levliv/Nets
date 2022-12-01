@@ -2,10 +2,9 @@
  
 const string host = "127.0.0.1";
 const int port = 8000;
-using TcpClient client = new TcpClient();
-Console.Write("Введите свое имя: ");
+using TcpClient client = new ();
+Console.Write("Enter your name: ");
 string? userName = Console.ReadLine();
-Console.WriteLine($"Добро пожаловать, {userName}");
 StreamReader? streamReader = null;
 StreamWriter? streamWriter = null;
  
@@ -28,7 +27,7 @@ async Task SendMessageAsync(StreamWriter writer)
 {
     await writer.WriteLineAsync(userName);
     await writer.FlushAsync();
-    Console.WriteLine("Для отправки сообщений введите сообщение и нажмите Enter");
+    Console.WriteLine("To send message, press \\Enter");
  
     while (true)
     {
@@ -45,17 +44,16 @@ async Task ReceiveMessageAsync(StreamReader reader)
         try
         {
             string? message = await reader.ReadLineAsync();
-            if (string.IsNullOrEmpty(message)) continue; 
-            Print(message);
+            
+            if (string.IsNullOrEmpty(message))
+            {
+                continue;
+            } 
+            Console.WriteLine(message);
         }
         catch
         {
             break;
         }
     }
-}
-
-void Print(string message)
-{
-    Console.WriteLine(message);
 }
