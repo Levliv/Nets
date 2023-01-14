@@ -10,7 +10,7 @@ public class Server
 
   public Server(int port)
   {
-    _tcpListener = new (IPAddress.Any, 8000);
+    _tcpListener = new (IPAddress.IPv6Loopback, port);
   }
   
   public async Task StartUpListenAsync()

@@ -7,7 +7,6 @@ class Program
   static async Task Main(string[] args)
   {
     Client client = new ();
-    
     if (!IPAddress.TryParse(args[0], out IPAddress? ipAddress))
     {
       Console.WriteLine("Entered ip is incorrect");

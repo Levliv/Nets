@@ -1,3 +1,4 @@
+using System.Net;
 using System.Net.Sockets;
 
 namespace ClientChat;
@@ -12,21 +13,24 @@ public class Client
     Login = Console.ReadLine();
     StreamReader? streamReader = null;
     StreamWriter? streamWriter = null;
- 
+
     try
     {
-      client.Connect(host, port);
+      client.Connect(address: IPAddress.Parse(host), port: port);
       streamReader = new StreamReader(client.GetStream());
       streamWriter = new StreamWriter(client.GetStream());
-      Task.Run(()=>GetAsync(streamReader));
+      Task.Run(() => GetAsync(streamReader));
       await SendAsync(streamWriter);
     }
     catch (Exception ex)
     {
-      Console.WriteLine(ex.Message);
+      Console.WriteLine($"Exception occured: {ex.Message}");
     }
-    streamWriter?.Close();
-    streamReader?.Close();
+    finally
+    {
+      streamWriter?.Close();
+      streamReader?.Close();
+    }
   }
   async Task SendAsync(StreamWriter writer)
   {
