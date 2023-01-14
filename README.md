@@ -10,6 +10,8 @@ NB: Don't forget to pass `port`
 Contains client part of an application, interacts with user, sends and receives massages for ip and port described in lauching parametrs.
 
 NB: Don't forget to pass `ip` and `port`
+ex. for localhost ::1 6789
 
 ## License
 Code in `GroupChat` directory is licensed under the [MIT Licence](LICENSE).
+ex. for localhost 6789
